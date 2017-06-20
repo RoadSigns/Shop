@@ -40,7 +40,7 @@
 
 <div id="wrapper">
 
-<!-- Navigation -->
+    <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <?php include ('template/mobile-header.php'); ?>
@@ -59,14 +59,14 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Forms
+                        Add a Product
                     </h1>
                     <ol class="breadcrumb">
                         <li>
-                            <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                            <i class="fa fa-shopping-cart"></i>  <a href="products.php">Products</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-edit"></i> Forms
+                            <i class="fa fa-plus"></i> Add a Product
                         </li>
                     </ol>
                 </div>
