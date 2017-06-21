@@ -16,30 +16,24 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="javascript:;" data-toggle="collapse" data-target="#users"><i class="fa fa-fw fa-users"></i> Users <i class="fa fa-fw fa-caret-down"></i></a>
+                    <a href="javascript:" data-toggle="collapse" data-target="#users"><i class="fa fa-fw fa-users"></i> Users <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="users" class="collapse">
                         <li>
                             <a href="add-product.php"><i class="fa fa-user-plus"></i> Add a User</a>
                         </li>
                         <li>
-                            <a href="products.php"><i class="fa fa-user"></i> List Users</a>
+                            <a href="users.php"><i class="fa fa-user"></i> List Users</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="forms.html"><i class="fa fa-fw fa-shopping-basket"></i> Orders</a>
+                    <a href="orders.php"><i class="fa fa-fw fa-shopping-basket"></i> Orders</a>
                 </li>
                 <li>
-                    <a href="bootstrap-elements.html"><i class="fa fa-fw fa-paint-brush"></i> Template</a>
+                    <a href="template.php"><i class="fa fa-fw fa-paint-brush"></i> Template</a>
                 </li>
                 <li>
-                    <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Settings</a>
-                </li>
-                <li>
-                    <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
-                </li>
-                <li>
-                    <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
+                    <a href="settings.php"><i class="fa fa-fw fa-wrench"></i> Settings</a>
                 </li>
             </ul>
         </div>
