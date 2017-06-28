@@ -109,4 +109,17 @@
         {
 
         }
+        
+        function listUsers()
+        {
+            $sql  = "SELECT `id`, `username`, `email`, `firstname`, `surname`, `permissions` FROM SHOP_users";
+            
+            $result = $this->link->query($sql)->fetchAll();
+
+            if ($result) {
+                return $result;
+            } else {
+                return $this->link->getError();
+            }
+        }
     }

@@ -76,38 +76,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <?php
-                        $registeredUsers = $user->listUsers();
-
-                        if ($registeredUsers) {
-                            echo '<table class="table">';
-                                echo '<thead>';
-                                    echo '<tr>';
-                                        echo '<th>#</th>';
-                                        echo '<th>Username</th>';
-                                        echo '<th class="hidden-sm hidden-xs">Email</th>';
-                                        echo '<th class="hidden-sm hidden-xs">Fullname</th>';
-                                        echo '<th class="hidden-sm hidden-xs">Permission</th>';
-                                        echo '<th>Edit</th>';
-                                        echo '<th>Delete</th>';
-                                    echo '</tr>';
-                                echo '</thead>';
-                            echo '<tbody>';
-
-                            foreach($registeredUsers as $registeredUser) {
-
-                                echo "<tr>";
-                                    echo '<th scope="row">'. $registeredUser->{"id"}.'</th>';
-                                    echo '<td>'.$registeredUser->{"username"}.'</td>';
-                                    echo '<td class="hidden-sm hidden-xs">'.$registeredUser->{"email"}.'</td>';
-                                    echo '<td class="hidden-sm hidden-xs">'.ucwords($registeredUser->{"firstname"}).' '.ucwords($registeredUser->{"surname"}).'</td>';
-                                    echo '<td class="hidden-sm hidden-xs">'.$registeredUser->{"permissions"}.'</td>';
-                                    echo '<td><a class="btn btn-warning btn-sm" href="edit-user.php" role="button">Edit</a></td>';
-                                    echo '<td><a class="btn btn-danger  btn-sm disabled" href="#" role="button" aria-disabled="true">Delete</a></td>';
-                                echo '</tr>';
-
-                            }
-                            echo '</tbody></table>';
-                        }
+                        echo "Test";
                     ?>
                 </div>
             </div>
