@@ -65,8 +65,11 @@
                         <li>
                             <i class="fa fa-users"></i> Users
                         </li>
+                        <li>
+                            <i class="fa fa-user"></i> <a href="users.php"> List Users</a>
+                        </li>
                         <li class="active">
-                            <i class="fa fa-user"></i> List Users
+                            <i class="fa fa-edit"></i> Edit User
                         </li>
                     </ol>
                 </div>
@@ -74,10 +77,37 @@
             <!-- /.row -->
 
             <div class="row">
-                <div class="col-lg-12">
-                    <?php
-                        echo "Test";
-                    ?>
+                <div class="col-lg-6 col-lg-offset-0 col-md-6  col-md-offset-0 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Username</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Email</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Password</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">First Name</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Lastname</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- /.row -->
