@@ -4,6 +4,9 @@
     $user->logInRequired();
 
     $account = ucfirst($_SESSION['user']['username']);
+    
+    $userID = $_GET['id'];
+
 ?>
 
 <!DOCTYPE html>
@@ -77,38 +80,57 @@
             <!-- /.row -->
 
             <div class="row">
-                <div class="col-lg-6 col-lg-offset-0 col-md-6  col-md-offset-0 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">Username</label>
-                        <div class="col-10">
-                            <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                <pre>
+                <?php
+
+                    //$update = $user->updateInformation($_POST['id'], $_POST['email'], $_POST['firstname'], $_POST['surname']);
+
+                    $result = $user->usersInformation($userID);
+                    var_dump($result);
+                ?>
+                </pre>
+                <form name="" method="post" action="">
+                    <div class="col-lg-6 col-lg-offset-0 col-md-6 col-md-offset-0 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                        <div class="form-group row">
+                            <label for="username" class="col-2 col-form-label">Username</label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" value="<?php echo $result->{"username"}; ?>" name="username" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-2 col-form-label">Email</label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" value="<?php echo $result->{"email"}; ?>" name="email">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="password" class="col-2 col-form-label">Password</label>
+                            <div class="col-10">
+                                <input class="form-control" type="password" value="" name="password">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="firstname" class="col-2 col-form-label">First Name</label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" value="<?php echo $result->{"firstname"}; ?>" name="firstname">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="surname" class="col-2 col-form-label">Surname</label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" value="<?php echo $result->{"surname"}; ?>" name="surname">
+                            </div>
+                        </div>
+                        <div>
+                            <input class="" type="hidden" value="<?php echo $result->{"id"};?>" name="id">
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-10">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">Email</label>
-                        <div class="col-10">
-                            <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">Password</label>
-                        <div class="col-10">
-                            <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">First Name</label>
-                        <div class="col-10">
-                            <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-text-input" class="col-2 col-form-label">Lastname</label>
-                        <div class="col-10">
-                            <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
             <!-- /.row -->
 

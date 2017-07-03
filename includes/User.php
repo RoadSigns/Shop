@@ -109,6 +109,39 @@
         {
 
         }
+
+        function usersInformation($id)
+        {
+            $sql = " SELECT * FROM SHOP_users WHERE id = :id";
+
+            $result = $this->link->query($sql)->bind(':id', $id)->fetchRow();
+
+            if ($result) {
+                return $result;
+            } else {
+                return false;
+            }
+        }
+
+        function updateInformation($id, $email, $firstname, $surname)
+        {
+            $table = 'SHOP_users';
+            $columns = array(
+                "id"        => "$id",
+                "email"     => "$email",
+                "firstname" => "$firstname",
+                "surname"   => "$surname"
+            );
+            $where = "id = '$id'";
+
+            $result = $this->link->update($table, $columns, $where);
+
+            if ($result) {
+                return true;
+            } else {
+                return false;
+            }
+        }
         
         function listUsers()
         {
