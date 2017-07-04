@@ -82,8 +82,9 @@
             <div class="row">
                 <pre>
                 <?php
-
-                    //$update = $user->updateInformation($_POST['id'], $_POST['email'], $_POST['firstname'], $_POST['surname']);
+                    if ($_POST) {
+                        $user->updateInformation($_POST['id'], $_POST['email'], $_POST['firstname'], $_POST['surname']);
+                    }
 
                     $result = $user->usersInformation($userID);
                     var_dump($result);
