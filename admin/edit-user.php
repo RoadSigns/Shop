@@ -4,8 +4,19 @@
     $user->logInRequired();
 
     $account = ucfirst($_SESSION['user']['username']);
-    
-    $userID = $_GET['id'];
+
+    if ($_POST) {
+        $user->updateInformation($_POST['id'], $_POST['email'], $_POST['firstname'], $_POST['surname']);
+    }
+
+    if (!empty($_GET['id'])) {
+        $userID = intval($_GET['id']);
+        if (is_int($userID)) {
+            $result = $user->usersInformation($userID);
+        }
+        // @TODO Header function
+    }
+
 
 ?>
 
@@ -80,16 +91,6 @@
             <!-- /.row -->
 
             <div class="row">
-                <pre>
-                <?php
-                    if ($_POST) {
-                        $user->updateInformation($_POST['id'], $_POST['email'], $_POST['firstname'], $_POST['surname']);
-                    }
-
-                    $result = $user->usersInformation($userID);
-                    var_dump($result);
-                ?>
-                </pre>
                 <form name="" method="post" action="">
                     <div class="col-lg-6 col-lg-offset-0 col-md-6 col-md-offset-0 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
                         <div class="form-group row">
