@@ -19,7 +19,7 @@
                     <a href="javascript:" data-toggle="collapse" data-target="#users"><i class="fa fa-fw fa-users"></i> Users <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="users" class="collapse">
                         <li>
-                            <a href="add-product.php"><i class="fa fa-user-plus"></i> Add a User</a>
+                            <a href="add-user.php"><i class="fa fa-user-plus"></i> Add a User</a>
                         </li>
                         <li>
                             <a href="users.php"><i class="fa fa-user"></i> List Users</a>
