@@ -6,6 +6,17 @@
     $account = ucfirst($_SESSION['user']['username']);
 
     $result = $products->listCategories();
+
+    if ($_GET) {
+        if (!empty($_GET['categoryID'])) {
+            $cleanCategoryID = intval($_GET['categoryID']);
+            if (is_int($cleanBrandID)) {
+                if ($products->deleteCategory($cleanCategoryID)) {
+                    header('Location: ' . ADMINURL . 'brands.php');
+                }
+            }
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -79,7 +90,6 @@
                     echo '<tr>';
                     echo '<th class="hidden-sm hidden-xs">#</th>';
                     echo '<th>Product Name</th>';
-                    echo '<th>Edit</th>';
                     echo '<th>Delete</th>';
                     echo '</tr>';
                     echo '</thead>';
@@ -89,7 +99,6 @@
                         echo "<tr>";
                         echo '<th scope="row">'. $category->{"id"}.'</th>';
                         echo '<td>'.$category->{"category"}.'</td>';
-                        echo '<td><a class="btn btn-warning btn-sm" href="edit-category.php?categoryid='.$category->{"id"}.'" role="button">Edit</a></td>';
                         echo '<td><a class="btn btn-danger  btn-sm" href="?categoryID='.$category->{"id"}.'" role="button">Delete</a></td>';
                         echo '</tr>';
                     }

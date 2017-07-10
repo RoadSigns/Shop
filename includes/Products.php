@@ -224,19 +224,39 @@
 
         function registerBrand($brand)
         {
-            $cleanBrand = addslashes($brand);
-            $table = DB_PREFIX . "brands";
-            $columns = array (
-                "id"     => "",
-                "name"  => "$cleanBrand",
-            );
+        $cleanBrand = addslashes($brand);
+        $table = DB_PREFIX . "brands";
+        $columns = array (
+            "id"     => "",
+            "name"  => "$cleanBrand",
+        );
 
-            return $this->link->insert($table, $columns);
+        return $this->link->insert($table, $columns);
         }
 
         function deleteBrand($id)
         {
             $table = DB_PREFIX . "brands";
+            $where = "id = '$id'";
+
+            return $this->link->delete($table, $where);
+        }
+
+        function registerCategory($category)
+        {
+            $cleanCategory = addslashes($category);
+            $table = DB_PREFIX . "category";
+            $columns = array (
+                "id"     => "",
+                "category"  => "$cleanCategory",
+            );
+
+            return $this->link->insert($table, $columns);
+        }
+
+        function deleteCategory($id)
+        {
+            $table = DB_PREFIX . "category";
             $where = "id = '$id'";
 
             return $this->link->delete($table, $where);

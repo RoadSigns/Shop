@@ -7,7 +7,7 @@
     $account = ucfirst($_SESSION['user']['username']);
 
     if ($_POST) {
-        if (!empty($_POST['brand'])) {
+        if (!empty($_POST['category'])) {
             if ($products->registerBrand($_POST['brand'])) {
                 header('Location: ' . ADMINURL . 'brands.php');
             }
