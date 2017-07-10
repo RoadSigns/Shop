@@ -1,7 +1,20 @@
 <?php
     require('includes/config.php');
 
-    $listOfProducts = $products->listAllProducts();
+
+    if (isset($_GET['brand'])) {
+
+        $brand = addslashes($_GET['brand']);
+
+        if($listOfProducts = $products->listProductByBrand($brand)) {
+
+        } else {
+            header('Location:' . URL);
+        }
+    } else {
+        header('Location:' . URL);
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -36,13 +49,12 @@
 <body>
 
 <div class="row col-lg-12">
-        <?php include ('templates/header.php'); ?>
+    <?php include ('templates/header.php'); ?>
 </div>
-
 <?php
     if ($listOfProducts) {
         foreach ($listOfProducts as $product) {
-?>
+            ?>
             <div class="block">
 
                 <div class="top">
@@ -59,11 +71,11 @@
 
                 <div class="middle">
                     <img
-                        src="content/products/<?php echo $product->{"id"};?>.png"
-                        alt="pic"
-                        height="150px"
-                        width="auto"
-                        style="object-fit: cover;"
+                            src="content/products/<?php echo $product->{"id"};?>.png"
+                            alt="pic"
+                            height="150px"
+                            width="auto"
+                            style="object-fit: cover;"
                     />
                 </div>
 
@@ -74,10 +86,9 @@
                 </div>
 
             </div>
-<?php
+            <?php
         }
     }
 ?>
-
 </body>
 </html>

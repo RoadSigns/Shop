@@ -1,5 +1,4 @@
 <?php
-
     class Users
     {
         private $link;
@@ -25,7 +24,7 @@
 
             $sql  = "SELECT username, passwd AS password, permissions";
             $sql .= " FROM SHOP_users";
-            $sql .= " WHERE username = :username AND permissions = 1";
+            $sql .= " WHERE username = :username AND permissions = 1 OR permissions = 2";
 
             $results = $this->link->query($sql)->bind(':username', $cleanUser)->fetchRow();
 
@@ -33,7 +32,8 @@
 
                 if ($results->password == crypt($cleanPass, $results->password)) {
 
-                    $_SESSION['user']['username'] = $results->username;
+                    $_SESSION['user']['username']   = $results->username;
+                    $_SESSION['user']['permissions'] = $results->permissions;
                     $_SESSION['approved'] = true;
                     header('Location: ' . ADMINURL);
                     exit();
@@ -105,8 +105,30 @@
         }
 
 
-        function register($username, $password, $email, $firstname, $lastname)
+        function register($username, $password, $email, $firstname, $surname, $permission, $registeredDate)
         {
+            $cleanPassword = addslashes($password);
+            $encryptPassword = crypt($cleanPassword);
+
+            $table = 'SHOP_users';
+            $columns = array (
+                "id" => "",
+                "username" => "$username",
+                "passwd" => "$encryptPassword",
+                "email" => "$email",
+                "firstname" => "$firstname",
+                "surname" => "$surname",
+                "permissions" => "$permission",
+                "reigsteredDate" => "$registeredDate"
+            );
+
+            $result = $this->link->insert($table, $columns);
+
+            if ($result) {
+                return true;
+            } else {
+                return false;
+            }
 
         }
 

@@ -15,6 +15,8 @@
                         </li>
                     </ul>
                 </li>
+
+                <?php if ($_SESSION['user']['permissions'] == 1) { ?>
                 <li>
                     <a href="javascript:" data-toggle="collapse" data-target="#users"><i class="fa fa-fw fa-users"></i> Users <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="users" class="collapse">
@@ -27,13 +29,14 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="orders.php"><i class="fa fa-fw fa-shopping-basket"></i> Orders</a>
+                    <a href="orders.php"><i class="fa fa-fw fa-shopping-basket"></i> Categories</a>
                 </li>
                 <li>
-                    <a href="template.php"><i class="fa fa-fw fa-paint-brush"></i> Template</a>
+                    <a href="brands.php"><i class="fa fa-fw fa-paint-brush"></i> Brands</a>
                 </li>
-                <li>
+                <!--<li>
                     <a href="settings.php"><i class="fa fa-fw fa-wrench"></i> Settings</a>
-                </li>
+                </li>-->
+                <?php }?>
             </ul>
         </div>

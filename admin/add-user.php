@@ -5,9 +5,22 @@
     $user->logInRequired();
 
     $account = ucfirst($_SESSION['user']['username']);
+    $today   = date("Y-m-d");
 
-    if ($_POST) {
-        $user->register();
+    if (!isset($_POST)) {
+
+        if (isset($_POST['email'])) {
+            $emailCheck = $validation->checkEmail($_POST['email']);
+
+            if (!$emailCheck) {
+                $validEmail = $_POST['email'];
+            }
+        }
+
+
+        if (isset($validEmail)){
+            $result = $user->register($_POST['username'], $_POST['password1'], $validEmail, $_POST['firstname'], $_POST['surname'], $_POST['permission'], $today);
+        }
     }
 
 ?>
@@ -65,7 +78,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Users
+                        Register a User
                     </h1>
                     <ol class="breadcrumb">
                         <li>
@@ -80,53 +93,72 @@
             <!-- /.row -->
 
             <div class="row">
-                <form name="" method="post" action="">
-                    <div class="col-lg-6 col-lg-offset-0 col-md-6 col-md-offset-0 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                        <div class="form-group row">
-                            <label for="username" class="col-2 col-form-label">Username</label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" name="username">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <pre>
+                            <?php
+                                echo $emailCheck;
+                            ?>
+                        </pre>
+                        <form method="post">
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-6 form-group">
+                                        <label>Username</label>
+                                        <input type="text" placeholder="Enter Your Username Here.." class="form-control" name="username">
+                                    </div>
+                                    <div class="col-sm-6 form-group">
+                                        <label>Email</label>
+                                        <input type="text" placeholder="Enter Company Name Here.." class="form-control" name="email">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 form-group">
+                                        <label>First Name</label>
+                                        <input type="text" placeholder="Enter First Name Here.." class="form-control" name="firstname">
+                                    </div>
+                                    <div class="col-sm-6 form-group">
+                                        <label>Surname</label>
+                                        <input type="text" placeholder="Enter Last Name Here.." class="form-control" name="surname">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 form-group">
+                                        <label>Password</label>
+                                        <input type="password" placeholder="Enter First Name Here.." class="form-control" name="password1">
+                                    </div>
+                                    <div class="col-sm-6 form-group">
+                                        <label>Confirm Password</label>
+                                        <input type="password" placeholder="Enter Last Name Here.." class="form-control" name="password2">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Permissions</label>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="permission" id="Admin" value="1">Admin
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="permission" id="Employee" value="2">Shop Employee
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="permission" id="NoPermissions" value="0">No Permissions
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-10">
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="email" class="col-2 col-form-label">Email</label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" name="email">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="password" class="col-2 col-form-label">Password</label>
-                            <div class="col-10">
-                                <input class="form-control" type="password" value="" name="password">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="password" class="col-2 col-form-label">Confirm Password</label>
-                            <div class="col-10">
-                                <input class="form-control" type="password" value="" name="password">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="firstname" class="col-2 col-form-label">First Name</label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" name="firstname">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="surname" class="col-2 col-form-label">Surname</label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" name="surname">
-                            </div>
-                        </div>
-                        <div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-10">
-                                <button type="submit" class="btn btn-success">Submit</button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
             <!-- /.row -->
 

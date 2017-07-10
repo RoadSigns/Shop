@@ -3,8 +3,33 @@
 
     interface Validation
     {
-        static function valid($argument);
+        function valid($argument);
         function alreadyExists($argument);
+    }
+
+    class Validator
+    {
+        private $email;
+        private $username;
+
+        function __construct()
+        {
+           $this->username = new UsernameValidation();
+           $this->email    = new EmailValidation();
+        }
+
+        function checkEmail($email)
+        {
+            if ($this->email->valid($email)) {
+                if ($this->email->alreadyExists($email)) {
+                    return "Email address already exists.";
+                } else {
+                    return false;
+                }
+            } else {
+                return "Invalid Email Address.";
+            }
+        }
     }
 
     class EmailValidation implements Validation
@@ -14,7 +39,7 @@
         /*
          * Email Validation constructor
          */
-        protected function __construct()
+        public function __construct()
         {
             $this->link = new MyPDO();
         }
@@ -26,7 +51,7 @@
          *
          * @return bool
          */
-        public static function valid($argument)
+        public function valid($argument)
         {
             // Checking if the Email Address is valid
             if (!filter_var($argument, FILTER_VALIDATE_EMAIL)) {
@@ -45,11 +70,16 @@
          */
         public function alreadyExists($argument)
         {
-            if (!EmailValidation::valid($argument)) {
-                // @todo send back error messages
-            } else {
+            $sql = "SELECT COUNT(*) AS Total FROM `SHOP_users` WHERE `email` = ':email'";
 
+            $result = $this->link->query($sql)->bind(':email', $argument)->fetchRow();
+
+            if ($result <= 1) {
+                return true;
+            } else {
+                return false;
             }
+
         }
     }
 
@@ -62,7 +92,7 @@
          *
          * @return type $this->link
          */
-        protected function __construct()
+        public function __construct()
         {
             $this->link = new MyPDO();
         }
@@ -74,11 +104,13 @@
          *
          * @return bool
          */
-        public static function valid($username)
+        public function valid($username)
         {
 
             if (strlen($username) <= 3) {
                 return false;
+            } else {
+                return true;
             }
         }
 

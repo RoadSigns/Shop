@@ -3,7 +3,7 @@
 
     $user->logInRequired();
 
-    $user = ucfirst($_SESSION['user']['username']);
+    $account = ucfirst($_SESSION['user']['username']);
 ?>
 
 <!DOCTYPE html>

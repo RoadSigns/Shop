@@ -6,13 +6,18 @@
     $account = ucfirst($_SESSION['user']['username']);
 
     if ($_POST) {
-        if (!empty($_POST['name'])) {
-            $addedProduct = $products->addProduct($_POST['name'], $_POST['price'], $_POST['stock'], $_POST['description'], $_FILES['tmp_name']);
-            if ($addedProduct) {
-                header('Location: ' . ADMINURL . 'products.php');
-            }
-        }
+        $products->updateProduct($_POST['id'], $_POST['name'], $_POST['price'], $_POST['stock'], $_POST['description']);
     }
+
+    if (!empty($_GET['productid'])) {
+        $productID = intval($_GET['productid']);
+        if (is_int($productID)) {
+            $result = $products->listProductByID($productID);
+        }
+        // @TODO Header function
+    }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +73,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Add a Product
+                        Product - <?php echo $result->{"name"}; ?>
                     </h1>
                     <ol class="breadcrumb">
                         <li>
@@ -90,52 +95,57 @@
                     <?php
                         if(isset($_POST)) {
                             var_dump($_POST);
-                            var_dump($_FILES['fileUpload']);
                         }
                     ?>
                 </pre>
-                <form name="" method="post" action="" enctype='multipart/form-data'>
-                    <div class="col-lg-12">
+                <form name="" method="post" action="">
+                    <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                        <img src="../content/products/<?php echo $result->{"id"}; ?>.png" width="100%" height="auto" style="max-width: 350px;"/>
+                    </div>
+                    <div class="col-lg-6 col-lg-offset-1">
                         <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                            <div class="form-group row">
-                                <label for="username" class="col-2 col-form-label">Product Name</label>
-                                <div class="col-10">
-                                    <input class="form-control" type="text" value="<?php echo $_POST['name']; ?>" name="name">
+                                <div class="form-group row">
+                                    <label for="username" class="col-2 col-form-label">Product Name</label>
+                                    <div class="col-10">
+                                        <input class="form-control" type="text" value="<?php echo $result->{"name"}; ?>" name="name">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                            <div class="form-group row">
-                                <label for="email" class="col-2 col-form-label">Price</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">£</span>
-                                    <input type="text" class="form-control" aria-label="Amount" value="<?php echo $_POST['price']; ?>" name="price">
+                            <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                                <div class="form-group row">
+                                    <label for="email" class="col-2 col-form-label">Price</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">£</span>
+                                        <input type="text" class="form-control" aria-label="Amount" value="<?php echo $result->{"price"}; ?>" name="price">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                            <div class="form-group row">
-                                <label for="firstname" class="col-2 col-form-label">Stock</label>
-                                <div class="col-10">
-                                    <input class="form-control" type="number" value="<?php echo $_POST['stock']; ?>" name="stock">
+                            <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                                <div class="form-group row">
+                                    <label for="firstname" class="col-2 col-form-label">Stock</label>
+                                    <div class="col-10">
+                                        <input class="form-control" type="number" value="<?php echo $result->{"stock"}; ?>" name="stock">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                            <div class="form-group row">
-                                <label class="custom-file">
-                                    <input type="file" name="fileUpload" id="file" class="custom-file-input">
-                                    <span class="custom-file-control"></span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                            <div class="form-group row">
-                                <label for="surname" class="col-2 col-form-label">Description</label>
-                                <div class="col-10">
-                                    <textarea class="form-control" id="exampleTextarea" rows="3" name="description"><?php echo $_POST['description']; ?></textarea>
+                            <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                                <div class="form-group row">
+                                    <label class="custom-file">
+                                        <input type="file" id="file" class="custom-file-input">
+                                        <span class="custom-file-control"></span>
+                                    </label>
                                 </div>
                             </div>
+                            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                                <div class="form-group row">
+                                    <label for="surname" class="col-2 col-form-label">Description</label>
+                                    <div class="col-10">
+                                        <textarea class="form-control" id="exampleTextarea" rows="3" name="description"><?php echo $result->{"description"}; ?></textarea>
+                                    </div>
+                                </div>
+                                <div>
+                                    <input class="" type="hidden" value="<?php echo $result->{"id"};?>" name="id">
+                                </div>
                             <div class="form-group row">
                                 <div class="col-10">
                                     <button type="submit" class="btn btn-success">Submit</button>
