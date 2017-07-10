@@ -7,19 +7,13 @@
     $account = ucfirst($_SESSION['user']['username']);
     $today   = date("Y-m-d");
 
-    if (!isset($_POST)) {
+    if ($_POST) {
+        if (!empty($_POST['password1'])) {
+            $result = $user->register($_POST['username'], $_POST['password1'], $_POST['email'], $_POST['firstname'], $_POST['surname'], $_POST['permission'], $today);
 
-        if (isset($_POST['email'])) {
-            $emailCheck = $validation->checkEmail($_POST['email']);
-
-            if (!$emailCheck) {
-                $validEmail = $_POST['email'];
+            if ($result) {
+                header('Location: ' . ADMINURL . 'users.php');
             }
-        }
-
-
-        if (isset($validEmail)){
-            $result = $user->register($_POST['username'], $_POST['password1'], $validEmail, $_POST['firstname'], $_POST['surname'], $_POST['permission'], $today);
         }
     }
 
