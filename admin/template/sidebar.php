@@ -29,7 +29,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="orders.php"><i class="fa fa-fw fa-shopping-basket"></i> Categories</a>
+                    <a href="categories.php"><i class="fa fa-fw fa-shopping-basket"></i> Categories</a>
                 </li>
                 <li>
                     <a href="brands.php"><i class="fa fa-fw fa-paint-brush"></i> Brands</a>
