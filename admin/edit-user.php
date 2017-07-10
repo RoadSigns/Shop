@@ -6,7 +6,9 @@
     $account = ucfirst($_SESSION['user']['username']);
 
     if ($_POST) {
-        $user->updateInformation($_POST['id'], $_POST['email'], $_POST['firstname'], $_POST['surname']);
+        $user->updateInformation($_POST['id'], $_POST['email'], $_POST['firstname'], $_POST['surname'], $_POST['permission']);
+        header('Location: ' . ADMINURL . 'users.php');
+
     }
 
     if (!empty($_GET['id'])) {
@@ -14,7 +16,9 @@
         if (is_int($userID)) {
             $result = $user->usersInformation($userID);
         }
-        // @TODO Header function
+        if (!$result) {
+            header('Location: ' . ADMINURL . 'users.php');
+        }
     }
 
 
@@ -115,6 +119,24 @@
                             <label for="surname" class1="col-2 col-form-label">Surname</label>
                             <div class="col-10">
                                 <input class="form-control" type="text" value="<?php echo $result->{"surname"}; ?>" name="surname">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Permissions</label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="permission" id="Admin" value="1">Admin
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="permission" id="Employee" value="2">Shop Employee
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="permission" id="NoPermissions" value="0">No Permissions
+                                </label>
                             </div>
                         </div>
                         <div>

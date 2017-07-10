@@ -145,14 +145,15 @@
             }
         }
 
-        function updateInformation($id, $email, $firstname, $surname)
+        function updateInformation($id, $email, $firstname, $surname, $permission)
         {
             $table = 'SHOP_users';
             $columns = array(
                 "id"        => "$id",
                 "email"     => "$email",
                 "firstname" => "$firstname",
-                "surname"   => "$surname"
+                "surname"   => "$surname",
+                "permissions" => "$permission"
             );
             $where = "id = '$id'";
 
