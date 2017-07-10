@@ -3,18 +3,24 @@
 
     $user->logInRequired();
 
+    $productCategories = $products->listCategories();
+    $productBrands     = $products->listBrands();
+
     $account = ucfirst($_SESSION['user']['username']);
 
     if ($_POST) {
-        $products->updateProduct($_POST['id'], $_POST['name'], $_POST['price'], $_POST['stock'], $_POST['description']);
+        $products->updateProduct($_POST['id'], $_POST['brand'], $_POST['name'], $_POST['price'], $_POST['stock'], $_POST['category'], $_POST['description']);
+        header('Location: ' . ADMINURL . 'products.php');
     }
 
     if (!empty($_GET['productid'])) {
         $productID = intval($_GET['productid']);
         if (is_int($productID)) {
             $result = $products->listProductByID($productID);
+        } if (!$result) {
+            header('Location: ' . ADMINURL . 'products.php');
         }
-        // @TODO Header function
+
     }
 
 
@@ -91,13 +97,6 @@
             <!-- /.row -->
 
             <div class="row">
-                <pre>
-                    <?php
-                        if(isset($_POST)) {
-                            var_dump($_POST);
-                        }
-                    ?>
-                </pre>
                 <form name="" method="post" action="">
                     <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
                         <img src="../content/products/<?php echo $result->{"id"}; ?>.png" width="100%" height="auto" style="max-width: 350px;"/>
@@ -109,6 +108,28 @@
                                     <div class="col-10">
                                         <input class="form-control" type="text" value="<?php echo $result->{"name"}; ?>" name="name">
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                                <div class="form-group row">
+                                    <label class="mr-sm-2" for="inlineFormCustomSelect">Brand</label>
+                                    <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="brand" id="inlineFormCustomSelect">
+                                        <option  value="<?php echo $result->{"brand"} ?>" selected>Choose...</option>
+                                        <?php foreach ($productBrands as $productBrand) {?>
+                                            <option name="brand" value="<?php echo $productBrand->{"id"}?>"><?php echo $productBrand->{"name"}?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                                <div class="form-group row">
+                                    <label class="mr-sm-2" for="inlineFormCustomSelect">Category</label>
+                                    <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="category" id="inlineFormCustomSelect">
+                                        <option value="<?php echo $result->{"category"} ?>" selected>Choose...</option>
+                                        <?php foreach ($productCategories as $productCategory) {?>
+                                            <option name="category" value="<?php echo $productCategory->{"id"}?>"><?php echo $productCategory->{"category"}?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">

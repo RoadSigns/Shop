@@ -1,19 +1,15 @@
 <?php
+
     require('../includes/config.php');
 
     $user->logInRequired();
 
     $account = ucfirst($_SESSION['user']['username']);
 
-    $result = $products->listBrands();
-
-    if ($_GET) {
-        if (!empty($_GET['brandID'])) {
-            $cleanBrandID = intval($_GET['brandID']);
-            if (is_int($cleanBrandID)) {
-                if ($products->deleteBrand($cleanBrandID)) {
-                    header('Location: ' . ADMINURL . 'brands.php');
-                }
+    if ($_POST) {
+        if (!empty($_POST['brand'])) {
+            if ($products->registerBrand($_POST['brand'])) {
+                header('Location: ' . ADMINURL . 'brands.php');
             }
         }
     }
@@ -72,37 +68,39 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Brands
+                        Register a Brand
                     </h1>
                     <ol class="breadcrumb">
-                        <li class="active">
-                            <i class="fa fa-fw fa-paint-brush"></i> Brands
+                        <li>
+                            <i class="fa fa-paint-brush"></i> Brands
                         </li>
+                        <li class="active">
+                            <i class="fa fa-plus"></i> Add a Brand
                     </ol>
                 </div>
             </div>
             <!-- /.row -->
 
             <div class="row">
-                <?php
-                    echo '<table class="table">';
-                    echo '<thead>';
-                    echo '<tr>';
-                    echo '<th class="hidden-sm hidden-xs">#</th>';
-                    echo '<th>Product Name</th>';
-                    echo '<th>Delete</th>';
-                    echo '</tr>';
-                    echo '</thead>';
-                    echo '<tbody>';
-
-                    foreach ($result as $brand) {
-                        echo "<tr>";
-                        echo '<th scope="row">'. $brand->{"id"}.'</th>';
-                        echo '<td>'.$brand->{"name"}.'</td>';
-                        echo '<td><a class="btn btn-danger  btn-sm" href="?brandID='.$brand->{"id"}.'" role="button">Delete</a></td>';
-                        echo '</tr>';
-                    }
-                ?>
+                <div class="col-lg-12">
+                    <div class="row">
+                        <form method="post">
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-6 form-group">
+                                        <label>Add a Brand</label>
+                                        <input type="text" placeholder="Enter Your Brand Here.." class="form-control" name="brand">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-10">
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
             <!-- /.row -->
 

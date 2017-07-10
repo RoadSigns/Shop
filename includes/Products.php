@@ -86,31 +86,35 @@
 
         }
 
-        function addProduct($name, $price, $stock, $description, $tmpFileName)
+        function addProduct($brand, $name, $price, $stock, $category, $description)
         {
             $table = DB_PREFIX . "products";
             $columns = array (
                 "id" => "",
+                "brand" => "$brand",
                 "name" => "$name",
                 "price" => "$price",
                 "stock" => "$stock",
+                "category" => "$category",
                 "description" => "$description"
             );
 
-            if ($this->link->insert($table, $columns)) {
+            return $this->link->insert($table, $columns);
 
-                $id = $this->link->insertID();
-
-                $targetPath = $_SERVER['DOCUMENT_ROOT']. "/learn/webstudent/sem6zl/shop/content/". $id .".png";
-
-                if (Products::addProductImage($tmpFileName,  $targetPath)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
+//            if ($this->link->insert($table, $columns)) {
+//
+//                $id = $this->link->insertID();
+//
+//                $targetPath = $_SERVER['DOCUMENT_ROOT']. "/learn/webstudent/sem6zl/shop/content/". $id .".png";
+//
+//                if (Products::addProductImage($tmpFileName,  $targetPath)) {
+//                    return true;
+//                } else {
+//                    return false;
+//                }
+//            } else {
+//                return false;
+//            }
         }
 
         function addProductImage($tmpFilePath, $id)
@@ -126,14 +130,16 @@
 
         }
 
-        function updateProduct($id, $name, $price, $stock, $description)
+        function updateProduct($id, $brand, $name, $price, $stock, $category, $description)
         {
             $table = DB_PREFIX . "products";
             $columns = array (
-                "id" => "$id",
-                "name" => "$name",
-                "price" => "$price",
-                "stock" => "$stock",
+                "id"          => "$id",
+                "brand"       => "$brand",
+                "name"        => "$name",
+                "price"       => "$price",
+                "stock"       => "$stock",
+                "category"    => "$category",
                 "description" => "$description"
             );
             $where = "id = '$id'";
@@ -214,5 +220,25 @@
                     GROUP BY SHOP_products.category";
 
             return $this->link->query($sql)->fetchAll();
+        }
+
+        function registerBrand($brand)
+        {
+            $cleanBrand = addslashes($brand);
+            $table = DB_PREFIX . "brands";
+            $columns = array (
+                "id"     => "",
+                "name"  => "$cleanBrand",
+            );
+
+            return $this->link->insert($table, $columns);
+        }
+
+        function deleteBrand($id)
+        {
+            $table = DB_PREFIX . "brands";
+            $where = "id = '$id'";
+
+            return $this->link->delete($table, $where);
         }
     }

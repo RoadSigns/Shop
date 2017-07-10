@@ -135,7 +135,7 @@
                                 echo '<th scope="row">'. $soldOutProduct->{"id"}.'</th>';
                                 echo '<td>'.$soldOutProduct->{"name"}.'</td>';
                                 echo '<td><a class="btn btn-warning btn-sm" href="edit-product.php?productid='.$soldOutProduct->{"id"}.'" role="button">Edit</a></td>';
-                                echo '<td><a class="btn btn-danger  btn-sm" href="?productID='.$soldOutProduct->{"id"}.'" role="button">Delete</a></td>';
+                                echo '<td><a class="btn btn-danger  btn-sm" href="products.php?productID='.$soldOutProduct->{"id"}.'" role="button">Delete</a></td>';
                                 echo '</tr>';
                             }
                             ?>

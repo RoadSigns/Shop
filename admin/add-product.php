@@ -3,11 +3,14 @@
 
     $user->logInRequired();
 
+    $productCategories = $products->listCategories();
+    $productBrands     = $products->listBrands();
+
     $account = ucfirst($_SESSION['user']['username']);
 
     if ($_POST) {
         if (!empty($_POST['name'])) {
-            $addedProduct = $products->addProduct($_POST['name'], $_POST['price'], $_POST['stock'], $_POST['description'], $_FILES['tmp_name']);
+            $addedProduct = $products->addProduct($_POST['brand'], $_POST['name'], $_POST['price'], $_POST['stock'], $_POST['category'], $_POST['description']);
             if ($addedProduct) {
                 header('Location: ' . ADMINURL . 'products.php');
             }
@@ -74,11 +77,8 @@
                         <li>
                             <i class="fa fa-shopping-cart"></i> Products
                         </li>
-                        <li>
-                            <i class="fa fa-list-ul"></i> <a href="products.php"> List Products</a>
-                        </li>
                         <li class="active">
-                            <i class="fa fa-edit"></i> Edit Product
+                            <i class="fa fa-plus"></i> Add a Product
                         </li>
                     </ol>
                 </div>
@@ -94,6 +94,28 @@
                                 <div class="col-10">
                                     <input class="form-control" type="text" value="<?php echo $_POST['name']; ?>" name="name">
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                            <div class="form-group row">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Brand</label>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="brand" id="inlineFormCustomSelect">
+                                    <option selected>Choose...</option>
+                                    <?php foreach ($productBrands as $productBrand) {?>
+                                        <option name="brand" value="<?php echo $productBrand->{"id"}?>"><?php echo $productBrand->{"name"}?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                            <div class="form-group row">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Category</label>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="category" id="inlineFormCustomSelect">
+                                    <option selected>Choose...</option>
+                                    <?php foreach ($productCategories as $productCategory) {?>
+                                        <option name="category" value="<?php echo $productCategory->{"id"}?>"><?php echo $productCategory->{"category"}?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
                         </div>
                         <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">

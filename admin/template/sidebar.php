@@ -15,6 +15,12 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                <a href="categories.php"><i class="fa fa-fw fa-shopping-basket"></i> Categories</a>
+                </li>
+                <li>
+                    <a href="brands.php"><i class="fa fa-fw fa-paint-brush"></i> Brands</a>
+                </li>
 
                 <?php if ($_SESSION['user']['permissions'] == 1) { ?>
                 <li>
@@ -27,12 +33,6 @@
                             <a href="users.php"><i class="fa fa-user"></i> List Users</a>
                         </li>
                     </ul>
-                </li>
-                <li>
-                    <a href="categories.php"><i class="fa fa-fw fa-shopping-basket"></i> Categories</a>
-                </li>
-                <li>
-                    <a href="brands.php"><i class="fa fa-fw fa-paint-brush"></i> Brands</a>
                 </li>
                 <!--<li>
                     <a href="settings.php"><i class="fa fa-fw fa-wrench"></i> Settings</a>
