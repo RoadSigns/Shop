@@ -106,19 +106,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="password" class="col-2 col-form-label">Password</label>
-                            <div class="col-10">
-                                <input class="form-control" type="password" value="" name="password">
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label for="firstname" class="col-2 col-form-label">First Name</label>
                             <div class="col-10">
                                 <input class="form-control" type="text" value="<?php echo $result->{"firstname"}; ?>" name="firstname">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="surname" class="col-2 col-form-label">Surname</label>
+                            <label for="surname" class1="col-2 col-form-label">Surname</label>
                             <div class="col-10">
                                 <input class="form-control" type="text" value="<?php echo $result->{"surname"}; ?>" name="surname">
                             </div>

@@ -89,8 +89,8 @@
                         echo "<tr>";
                         echo '<th scope="row">'. $category->{"id"}.'</th>';
                         echo '<td>'.$category->{"category"}.'</td>';
-                        echo '<td><a class="btn btn-warning btn-sm" href="edit-brand.php?brandid='.$category->{"id"}.'" role="button">Edit</a></td>';
-                        echo '<td><a class="btn btn-danger  btn-sm" href="?brandID='.$category->{"id"}.'" role="button">Delete</a></td>';
+                        echo '<td><a class="btn btn-warning btn-sm" href="edit-category.php?categoryid='.$category->{"id"}.'" role="button">Edit</a></td>';
+                        echo '<td><a class="btn btn-danger  btn-sm" href="?categoryID='.$category->{"id"}.'" role="button">Delete</a></td>';
                         echo '</tr>';
                     }
                 ?>

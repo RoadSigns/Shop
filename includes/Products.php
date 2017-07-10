@@ -197,4 +197,22 @@
 
             return $this->link->query($sql)->fetchAll();
         }
+
+        function soldOutProducts()
+        {
+            $sql = "SELECT * FROM `SHOP_products` WHERE stock <= 0";
+
+            return $this->link->query($sql)->fetchAll();
+        }
+
+        function totalProductsPerCategory()
+        {
+            $sql = "SELECT SHOP_products.category, count(1) as Total, SHOP_category.category
+                    FROM SHOP_products
+                    JOIN SHOP_category
+                    ON SHOP_category.id = SHOP_products.category
+                    GROUP BY SHOP_products.category";
+
+            return $this->link->query($sql)->fetchAll();
+        }
     }

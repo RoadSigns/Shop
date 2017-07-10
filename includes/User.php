@@ -177,4 +177,10 @@
                 return $this->link->getError();
             }
         }
+
+        function listUsersWithNoPermissions()
+        {
+            $sql = "SELECT * FROM `SHOP_users` WHERE `permissions` = 0";
+            return $this->link->query($sql)->fetchAll();
+        }
     }

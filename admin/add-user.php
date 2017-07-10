@@ -95,11 +95,6 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="row">
-                        <pre>
-                            <?php
-                                echo $emailCheck;
-                            ?>
-                        </pre>
                         <form method="post">
                             <div class="col-sm-12">
                                 <div class="row">
@@ -126,10 +121,6 @@
                                     <div class="col-sm-6 form-group">
                                         <label>Password</label>
                                         <input type="password" placeholder="Enter First Name Here.." class="form-control" name="password1">
-                                    </div>
-                                    <div class="col-sm-6 form-group">
-                                        <label>Confirm Password</label>
-                                        <input type="password" placeholder="Enter Last Name Here.." class="form-control" name="password2">
                                     </div>
                                 </div>
                                 <div class="form-group">
